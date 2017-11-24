@@ -16,6 +16,9 @@ gem 'font-awesome-sass'
 gem 'simple_form'
 gem 'autoprefixer-rails'
 
+gem 'cloudinary'
+gem 'carrierwave', '~> 1.2'
+
 group :development, :test do
   gem 'spring'
   gem 'web-console'
