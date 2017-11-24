@@ -18,7 +18,6 @@ gem 'autoprefixer-rails'
 
 gem 'cloudinary'
 gem 'carrierwave', '~> 1.2'
-gem 'webpacker', '~> 3.0'
 
 group :development, :test do
   gem 'spring'
