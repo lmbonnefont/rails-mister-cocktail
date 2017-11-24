@@ -1,27 +1,32 @@
-<h1 class="text-center">Your cocktail list</h1>
-
-<div class="text-center padded">
-  <%= link_to "Create a cocktail", new_cocktail_path, class: "btn btn-primary" %>
+<div class="banner" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%), url('http://www.algonquinhotel.com/wp-content/uploads/2015/02/BlueBar_3.jpg');">
+  <div class="banner-content">
+    <h1 class="text-center">Your cocktail list</h1>
+      <div class="lien">
+        <%= link_to "Create a cocktail", new_cocktail_path, class: "btn btn-primary" %>
+      </div>
+  </div>
 </div>
 
-<div class="container">
-  <div class="row">
-    <% @cocktails.each do |cocktail| %>
-      <div class="col-xs-12 col-sm-4">
-        <div class="card text-center">
+<div class="wrapper">
+  <div class="container">
+    <div class="row">
+      <% @cocktails.each do |cocktail| %>
+        <div class="col-xs-12 col-sm-4">
+          <div class="card text-center">
 
-          <% if cocktail.picture %>
-            <div class="card-header" style="background-image: url('<%= cl_image_path cocktail.picture, height: 150, width: 360, crop: :fill %>')">
+            <% if cocktail.picture %>
+              <div class="card-header" style="background-image: url('<%= cl_image_path cocktail.picture, height: 150, width: 360, crop: :fill %>')">
+              </div>
+            <% else %>
+              <div class="card-header" style="background-image: url('http://www.seriouseats.com/images/2014/11/20141104-cocktail-party-old-fashioneds-holiday-vicky-wasik-3.jpg')">
+              </div>
+            <% end %>
+            <div class="card-body">
+              <%= link_to cocktail.name, cocktail_path(cocktail) %>
             </div>
-          <% else %>
-            <div class="card-header" style="background-image: url('http://www.seriouseats.com/images/2014/11/20141104-cocktail-party-old-fashioneds-holiday-vicky-wasik-3.jpg')">
-            </div>
-          <% end %>
-          <div class="card-body">
-            <%= link_to cocktail.name, cocktail_path(cocktail) %>
           </div>
         </div>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
   </div>
 </div>
