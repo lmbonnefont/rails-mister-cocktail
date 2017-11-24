@@ -1,8 +1,27 @@
-<h1>Mister Cocktail vous propose</h1>
-<% @cocktails.each do |cocktail| %>
-<h3><%= link_to cocktail.name, cocktail_path(cocktail) %>: <% cocktail.doses.each do |e| %>
-  <%= e.ingredient.name %>
+<h1 class="text-center">Your cocktail list</h1>
+
+<div class="text-center padded">
+  <%= link_to "Create a cocktail", new_cocktail_path, class: "btn btn-primary" %>
+</div>
+
+<div class="container">
+  <div class="row">
+    <% @cocktails.each do |cocktail| %>
+      <div class="col-xs-12 col-sm-4">
+        <div class="card text-center">
+
+          <% if cocktail.picture %>
+            <div class="card-header" style="background-image: url('<%= image_path cocktail.picture%>')">
+            </div>
+          <% else %>
+            <div class="card-header" style="background-image: url('http://www.seriouseats.com/images/2014/11/20141104-cocktail-party-old-fashioneds-holiday-vicky-wasik-3.jpg')">
+            </div>
+          <% end %>
+          <div class="card-body">
+            <%= link_to cocktail.name, cocktail_path(cocktail) %>
+          </div>
+        </div>
+      </div>
     <% end %>
-  </h3>
-<% end %>
-<%= link_to "create a new cocktail", new_cocktail_path  %>
+  </div>
+</div>

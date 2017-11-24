@@ -1,55 +1,34 @@
 class CocktailsController < ApplicationController
-  def new
-    @cocktail = Cocktail.new
-    @dose = Dose.new
-    @ingredientsa = Ingredient.all
-    @ingredients = []
-    @ingredientsa.each do |ingredient|
-      @ingredients << [ingredient.name, ingredient.id]
-    end
-  end
-
-  def create
-
-    hash = {
-      name: params["name"]
-    }
-    a = Cocktail.create(hash)
-
-    for i in (1..3) do
-      if params["description_dose#{i}"] != ""
-        hashdose = {
-          description: params["description_dose#{i}"],
-          cocktail: a,
-          ingredient: Ingredient.find(params["ingredient#{i}"])
-        }
-        Dose.create(hashdose)
-      end
-    end
-    redirect_to cocktails_path
-  end
-
-  def show
-    @cocktail = Cocktail.find(params[:id])
-  end
-
+  # GET /cocktails
   def index
     @cocktails = Cocktail.all
   end
 
-  def destroy
+  # GET /cocktails/1
+  def show
+    @cocktail = Cocktail.find(params[:id])
+    @dose = Dose.new
   end
 
-  def edit
+  # GET /cocktails/new
+  def new
+    @cocktail = Cocktail.new
   end
 
-  def update
+  # POST /cocktails
+  def create
+    @cocktail = Cocktail.new(cocktail_params)
+    if @cocktail.save
+      redirect_to cocktail_path(@cocktail)
+    else
+      render :new
+    end
   end
 
   private
 
-  def restaurant_params
-    params.permit("ingredient3", "ingredient1", "ingredient2", "description_dose2", "description_dose1", "description_dose3", "name")
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def cocktail_params
+    params.require(:cocktail).permit(:name)
   end
-
 end
